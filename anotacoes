@@ -1,0 +1,47 @@
+#Anotacoes
+
+
+#iniciando zookepeer
+bash zookeeper-server-start.sh /home/richard/server/kafka/config/zookeeper.properties 
+
+#iniciando kafka
+bash kafka-server-start.sh /home/richard/server/kafka/config/server.properties  
+
+#criando topico 
+bash kafka-topics.sh --bootstrap-server localhost:9092 --create --topic teste
+
+
+#listando os topicos 
+bash kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+#Escrevendo no topico teste
+bash kafka-console-producer.sh --broker-list localhost:9092 --topic teste
+> mensageria 1
+> mensageria 2
+
+#Lendo no topico a aprtir de uma nova 
+bash kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teste 
+
+#Lendo no topico desde o inicio
+bash kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teste --from-beginning
+
+#Obter descricao de um topico
+bash kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teste --describe
+
+#Alterar particao de um topico
+bash kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic teste --partitions 10
+
+#deletar topico
+bash kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic teste 
+
+#produzindo mensagem com chave e valor 
+bin bash kafka-console-producer.sh --broker-list localhost:9092 --topic teste --property parse.key=true --property key.separator=,
+
+#consumir mensagem com chave e valor 
+bash kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teste --group grupo1 --property parse.key=true --property key.separator=,
+
+#Criando novo topico
+bash kafka-topics.sh --bootstrap-server localhost:9092 --create --topic testeJava
+
+#lista os grupos
+bash kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
